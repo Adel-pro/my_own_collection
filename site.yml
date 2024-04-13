@@ -1,5 +1,7 @@
 ---
 - name: Test my_role
   hosts: localhost
+  collections:
+    - netology.yandex_cloud_elk
   roles:
     - test
