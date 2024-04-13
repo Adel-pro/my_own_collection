@@ -1,0 +1,4 @@
+- name: Call my_own_module
+  my_own_module:
+    path: "{{ path_to_file }}"
+    content: "{{ file_content }}"
