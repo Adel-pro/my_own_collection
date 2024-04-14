@@ -70,8 +70,8 @@ def run_module():
     # state will include any data that you want your module to pass back
     # for consumption, for example, in a subsequent task
     result = dict(
-        changed=True,
-	indicator=1
+        changed = '',
+        message = ''
     )
 
     # the AnsibleModule object will be our abstraction working with Ansible
@@ -93,19 +93,18 @@ def run_module():
     # part where your module will do what it needs to do)
 
     import os.path
-    indicator=0
     if not os.path.exists(module.params['path']):
         with open(module.params['path'], "w") as file:
             file.write(module.params['content'])
             result['message'] = 'file created successfully'
-            indicator=1
+        result['changed'] = True
     elif module.params['content'] != open(module.params['path']).read():
         with open(module.params['path'], "w") as file:
             file.write(module.params['content'])
             result['message'] = 'file rewritten successfully'
-            indicator=1
+        result['changed'] = True
     else:
-        indicator=0
+        result['changed'] = False
 
     # during the execution of the module, if there is an exception or a
     # conditional state that effectively causes a failure, run
